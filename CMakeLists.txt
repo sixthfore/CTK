@@ -290,6 +290,7 @@ SET(CTK_APPLICATIONS
   ctkDICOMIndexer:OFF
   ctkDICOMDemoSCU:OFF
   ctkDICOMQuery:OFF
+  ctkImageViewer:OFF
   ctkPluginBrowser:OFF
   )
   
