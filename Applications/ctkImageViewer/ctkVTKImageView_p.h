@@ -38,7 +38,7 @@
 #include <vtkRenderWindow.h>
 #include <vtkSmartPointer.h>
 #include <vtkWeakPointer.h>
-#include <vtkImageMapper.h>
+#include <vtkImageViewer2.h>
 
 
 class vtkRenderWindowInteractor;
@@ -58,6 +58,7 @@ public:
 
   QVTKWidget*                                   VTKWidget;
   vtkSmartPointer<vtkRenderWindow>              RenderWindow;
+  vtkSmartPointer<vtkImageViewer2>              ImageViewer;
 
   vtkWeakPointer<vtkImageData>                  ImageData;
 };
