@@ -5,7 +5,8 @@
 #include "ctkPimpl.h"
 #include "ctkImageViewerMainWindow.h"
 #include "ui_ctkImageViewerMainWindow.h"
-
+#include "vtkPNGReader.h"
+#include "vtkSmartPointer.h"
 
 //-----------------------------------------------------------------------------
 class ctkImageViewerMainWindowPrivate: public QObject, 
@@ -17,7 +18,7 @@ public:
   CTK_DECLARE_PUBLIC(ctkImageViewerMainWindow);
   ctkImageViewerMainWindowPrivate()
     {
-
+    this->reader = vtkSmartPointer<vtkPNGReader>::New();
     }
 
   void setupUi(QMainWindow * mainWindow);
@@ -32,7 +33,10 @@ public slots:
   void onFileOpenActionTriggered();
 
 public: 
- 
+
+private:
+  vtkSmartPointer <vtkPNGReader> reader;
+  QMainWindow *mainwindow;
 };
 
 #endif

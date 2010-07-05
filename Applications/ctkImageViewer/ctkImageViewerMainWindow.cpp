@@ -1,6 +1,8 @@
 
 // Qt includes
 #include <QDebug>
+#include <QFileDialog>
+#include <QDir>
 
 // CTK includes
 #include "ctkLogger.h"
@@ -18,7 +20,7 @@ static ctkLogger logger("org.commontk.applications.ctkImageViewer.ctkImageViewer
 void ctkImageViewerMainWindowPrivate::setupUi(QMainWindow * mainWindow)
 { 
   this->Ui_ctkImageViewerMainWindow::setupUi(mainWindow);
-
+  this->mainwindow = mainWindow;
   // Connection between widgets should be done here ...
   
 
@@ -48,6 +50,14 @@ void ctkImageViewerMainWindowPrivate::setupMenuActions()
 //-----------------------------------------------------------------------------
 void ctkImageViewerMainWindowPrivate::onFileOpenActionTriggered()
 {
+  QString fileName = QFileDialog::getOpenFileName(this->mainwindow, tr("Open File"), QDir::currentPath());
+  
+  if (!fileName.isEmpty()){
+	this->reader->SetFileName(fileName.toAscii().constData() );
+	this->reader->Update();
+  }
+	
+	
   qDebug() << "onFileOpenActionTriggered";
 }
 
@@ -59,5 +69,6 @@ ctkImageViewerMainWindow::ctkImageViewerMainWindow(QWidget *newParent):Superclas
 {
   CTK_INIT_PRIVATE(ctkImageViewerMainWindow);
   CTK_D(ctkImageViewerMainWindow);
+  
   d->setupUi(this);
 }
