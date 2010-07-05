@@ -39,7 +39,8 @@
 #include <vtkSmartPointer.h>
 #include <vtkWeakPointer.h>
 #include <vtkImageViewer2.h>
-
+#include <vtkRenderWindowInteractor.h>
+#include <vtkInteractorStyleImage.h>
 
 class vtkRenderWindowInteractor;
 
@@ -58,8 +59,15 @@ public:
 
   QVTKWidget*                                   VTKWidget;
   vtkSmartPointer<vtkRenderWindow>              RenderWindow;
+  vtkSmartPointer<vtkRenderer>                  Renderer;
   vtkSmartPointer<vtkImageViewer2>              ImageViewer;
 
+  vtkSmartPointer<vtkRenderWindowInteractor>    Interactor;
+  vtkSmartPointer<vtkInteractorStyleImage>      InteractorStyle;
+
+  bool                                          RenderPending;
+  bool                                          RenderEnabled;
+  
   vtkWeakPointer<vtkImageData>                  ImageData;
 };
 

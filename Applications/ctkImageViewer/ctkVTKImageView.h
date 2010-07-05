@@ -36,6 +36,7 @@ class vtkImageData;
 class CTK_VISUALIZATION_VTK_WIDGETS_EXPORT ctkVTKImageView : public QWidget
 {
   Q_OBJECT
+  Q_PROPERTY(bool renderEnabled READ renderEnabled WRITE setRenderEnabled)
 
 public:
   /// Constructors
@@ -43,13 +44,27 @@ public:
   explicit ctkVTKImageView(QWidget* parent = 0);
   virtual ~ctkVTKImageView();
 
+  /// If a render has already been scheduled, this called is a no-op
+  void scheduleRender();
+
 public slots:
+
+  /// Force a render even if a render is already ocurring
+  void forceRender();
+
 
 public:
 
   /// Set image data
   void setImageData(vtkImageData* newImageData);
-  
+ 
+ /// Return if rendering is enabled
+  bool renderEnabled() const;
+
+  /// Enable/Disable rendering
+  void setRenderEnabled(bool value);
+
+ 
 private:
   CTK_DECLARE_PRIVATE(ctkVTKImageView);
 }; 
