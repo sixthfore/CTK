@@ -7,6 +7,7 @@
 #include "ui_ctkImageViewerMainWindow.h"
 #include "vtkPNGReader.h"
 #include "vtkSmartPointer.h"
+#include "ctkVTKSliceView.h"
 
 //-----------------------------------------------------------------------------
 class ctkImageViewerMainWindowPrivate: public QObject, 
@@ -19,6 +20,7 @@ public:
   ctkImageViewerMainWindowPrivate()
     {
     this->reader = vtkSmartPointer<vtkPNGReader>::New();
+    this->sliceviewer = new ctkVTKSliceView;
     }
 
   void setupUi(QMainWindow * mainWindow);
@@ -37,6 +39,8 @@ public:
 private:
   vtkSmartPointer <vtkPNGReader> reader;
   QMainWindow *mainwindow;
+  ctkVTKSliceView *sliceviewer;
+  
 };
 
 #endif

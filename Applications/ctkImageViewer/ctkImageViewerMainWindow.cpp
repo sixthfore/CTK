@@ -3,6 +3,7 @@
 #include <QDebug>
 #include <QFileDialog>
 #include <QDir>
+#include <QLayout>
 
 // CTK includes
 #include "ctkLogger.h"
@@ -21,8 +22,9 @@ void ctkImageViewerMainWindowPrivate::setupUi(QMainWindow * mainWindow)
 { 
   this->Ui_ctkImageViewerMainWindow::setupUi(mainWindow);
   this->mainwindow = mainWindow;
-  // Connection between widgets should be done here ...
   
+  // Connection between widgets should be done here ...
+  this->mainwindow->layout()->addWidget(this->sliceviewer);
 
   this->setupMenuActions();
 }
@@ -55,6 +57,8 @@ void ctkImageViewerMainWindowPrivate::onFileOpenActionTriggered()
   if (!fileName.isEmpty()){
 	this->reader->SetFileName(fileName.toAscii().constData() );
 	this->reader->Update();
+  this->sliceviewer->setImageData(this->reader->GetOutput() );
+  
   }
 	
 	
