@@ -20,12 +20,18 @@ SET(KIT_SRCS
   ctkImageViewerMainWindow.cpp
   ctkImageViewerMainWindow.h
   ctkImageViewerMainWindow_p.h
+  
+  ctkVTKImageView.cpp
+  ctkVTKImageView.h
+  ctkVTKImageView_p.h
   )
 
 # Headers that should run through moc
 SET(KIT_MOC_SRCS
   ctkImageViewerMainWindow.h
   ctkImageViewerMainWindow_p.h
+  ctkVTKImageView.h
+  ctkVTKImageView_p.h
   )
 
 # UI files

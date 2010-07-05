@@ -22,9 +22,9 @@ void ctkImageViewerMainWindowPrivate::setupUi(QMainWindow * mainWindow)
 { 
   this->Ui_ctkImageViewerMainWindow::setupUi(mainWindow);
   this->mainwindow = mainWindow;
-  
+
   // Connection between widgets should be done here ...
-  this->mainwindow->layout()->addWidget(this->sliceviewer);
+  this->mainwindow->layout()->addWidget(this->imageviewer);
 
   this->setupMenuActions();
 }
@@ -33,8 +33,8 @@ void ctkImageViewerMainWindowPrivate::openFileName(const char *fileName)
 {
 	this->reader->SetFileName(fileName);
 	this->reader->Update();
-  this->sliceviewer->setImageData(this->reader->GetOutput() );
-  this->sliceviewer->resetCamera();
+  this->imageviewer->setImageData(this->reader->GetOutput() );
+  this->imageviewer->resetCamera();
 }
 
 //-----------------------------------------------------------------------------
