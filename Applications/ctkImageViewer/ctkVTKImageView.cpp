@@ -21,6 +21,7 @@
 // Qt includes
 #include <QTimer>
 #include <QDebug>
+#include <QVBoxLayout>
 
 // CTK includes
 #include "ctkVTKImageView.h"
@@ -61,16 +62,7 @@ void ctkVTKImageViewPrivate::setupRendering()
   this->RenderWindow->SetMultiSamples(0);
   this->RenderWindow->StereoCapableWindowOn();
   
-  this->RenderWindow->GetRenderers()->RemoveAllItems();
-
   this->VTKWidget->SetRenderWindow(this->RenderWindow);
-}
-
-//---------------------------------------------------------------------------
-void ctkVTKImageViewPrivate::setupDefaultInteractor()
-{
-  CTK_P(ctkVTKImageView);
-  p->setInteractor(this->RenderWindow->GetInteractor());
 }
 
 //---------------------------------------------------------------------------
@@ -88,8 +80,6 @@ ctkVTKImageView::ctkVTKImageView(QWidget* _parent) : Superclass(_parent)
   this->layout()->setSpacing(0);
   this->layout()->addWidget(d->VTKWidget);
 
-  this->setRenderWindowLayout(1, 1);
-  d->setupDefaultInteractor();
 }
 
 // --------------------------------------------------------------------------
@@ -104,6 +94,8 @@ void ctkVTKImageView::setImageData(vtkImageData* newImageData)
 
   if (newImageData)
     {
+    d->ImageViewer->SetInput(newImageData);
+    d->ImageViewer->SetupInteractor(d->RenderWindow->GetInteractor());
     }
 
   d->ImageData = newImageData;

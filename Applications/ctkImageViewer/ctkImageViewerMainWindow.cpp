@@ -34,7 +34,6 @@ void ctkImageViewerMainWindowPrivate::openFileName(const char *fileName)
 	this->reader->SetFileName(fileName);
 	this->reader->Update();
   this->imageviewer->setImageData(this->reader->GetOutput() );
-  this->imageviewer->resetCamera();
 }
 
 //-----------------------------------------------------------------------------
