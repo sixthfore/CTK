@@ -24,7 +24,7 @@ public:
     }
 
   void setupUi(QMainWindow * mainWindow);
-  
+  void openFileName(const char *fileName);  
   ///
   /// Connect MainWindow menu actions with corresponding slots
   void setupMenuActions();

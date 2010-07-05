@@ -69,6 +69,11 @@ int main(int argc, char** argv)
   // Display main widgets
   ctkImageViewerMainWindow mainWindow;
   mainWindow.show();
+  
+  if(argc > 1)
+    {
+    mainWindow.openFileName(argv[1]);
+    }
 
   return app.exec();  
 }

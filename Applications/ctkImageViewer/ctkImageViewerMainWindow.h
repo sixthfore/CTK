@@ -16,7 +16,7 @@ class ctkImageViewerMainWindow : public QMainWindow
 public:
   typedef QMainWindow Superclass;
   ctkImageViewerMainWindow(QWidget *newParent = 0);
-  
+  void openFileName(const char *fileName);   
   
 private:
   CTK_DECLARE_PRIVATE(ctkImageViewerMainWindow);

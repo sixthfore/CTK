@@ -29,6 +29,14 @@ void ctkImageViewerMainWindowPrivate::setupUi(QMainWindow * mainWindow)
   this->setupMenuActions();
 }
 
+void ctkImageViewerMainWindowPrivate::openFileName(const char *fileName)
+{
+	this->reader->SetFileName(fileName);
+	this->reader->Update();
+  this->sliceviewer->setImageData(this->reader->GetOutput() );
+  this->sliceviewer->resetCamera();
+}
+
 //-----------------------------------------------------------------------------
 // Helper macro allowing to connect the MainWindow action with the corresponding slot
 #define ctkImageViewerMainWindow_connect(ACTION_NAME)   \
@@ -54,12 +62,10 @@ void ctkImageViewerMainWindowPrivate::onFileOpenActionTriggered()
 {
   QString fileName = QFileDialog::getOpenFileName(this->mainwindow, tr("Open File"), QDir::currentPath());
   
-  if (!fileName.isEmpty()){
-	this->reader->SetFileName(fileName.toAscii().constData() );
-	this->reader->Update();
-  this->sliceviewer->setImageData(this->reader->GetOutput() );
-  
-  }
+  if (!fileName.isEmpty())
+    {
+	  this->openFileName(fileName.toAscii().constData() );
+    }
 	
 	
   qDebug() << "onFileOpenActionTriggered";
@@ -76,3 +82,15 @@ ctkImageViewerMainWindow::ctkImageViewerMainWindow(QWidget *newParent):Superclas
   
   d->setupUi(this);
 }
+
+
+//-----------------------------------------------------------------------------
+void ctkImageViewerMainWindow::openFileName(const char *fileName)
+{
+  CTK_INIT_PRIVATE(ctkImageViewerMainWindow);
+  CTK_D(ctkImageViewerMainWindow);
+  
+  d->openFileName(fileName);
+}
+
+
